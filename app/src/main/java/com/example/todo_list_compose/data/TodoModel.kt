@@ -9,6 +9,7 @@ data class TodoModel(
     var taskName : String,
     var taskDescription: String,
     var taskDone:Boolean = false,
-    @PrimaryKey val idn: Int = 0
+    @PrimaryKey(autoGenerate = true)
+    val idn: Int = 0
 )
 

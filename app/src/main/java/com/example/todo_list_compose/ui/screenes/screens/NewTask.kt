@@ -1,5 +1,7 @@
 package com.example.todo_list_compose.ui.screenes.detiles
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
@@ -14,8 +16,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todo_list_compose.R
 import com.example.todo_list_compose.ui.AppViewModelProvider
-import com.example.todo_list_compose.ui.nav.NavigationDestination
+import com.example.todo_list_compose.ui.navigation.NavigationDestination
 import com.example.todo_list_compose.ui.screenes.TaskDetailse
+import com.example.todo_list_compose.ui.screenes.TaskUiState
 import com.example.todo_list_compose.ui.screenes.TodoListTopAppBar
 import com.example.todo_list_compose.ui.screenes.TodoListViewModel
 import com.example.todo_list_compose.ui.theme.TODO_LIST_COMPOSETheme
@@ -28,7 +31,7 @@ object NewTaskDestination: NavigationDestination {
 
 
 @Composable
-fun NewTaskApp(
+fun NewTask(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     canNavigateBack: Boolean = true,
@@ -47,12 +50,15 @@ fun NewTaskApp(
         }
     ) { paddingValues ->
         InputTask(
-            todoModel = viewModel.taskUiState.taskDetailse,
+            todoModel = viewModel.taskUiState,
             onItemValueChange = viewModel::updateUiState,
             onClick = {
                 coroutineScope.launch {
                     viewModel.saveItem()
+                    //navigateBack()
+                    Log.e("TAG", "NewTask:task is ${viewModel.taskUiState} ", )
                     navigateBack()
+
                 }
             },
             modifier = modifier.padding(paddingValues)
@@ -70,7 +76,7 @@ fun NewTaskApp(
 
 @Composable
 fun InputTask(
-    todoModel: TaskDetailse,
+    todoModel: TaskUiState,
     modifier: Modifier = Modifier,
     onClick : () -> Unit ,
     onItemValueChange:(TaskDetailse) -> Unit
@@ -80,9 +86,9 @@ fun InputTask(
             .fillMaxSize()
             .padding(16.dp)
     ){
-        InputTaskTextFiled(todoModel, onItemValueChange =  onItemValueChange)
+        InputTaskTextFiled(todoModel.taskDetailse, onItemValueChange =  onItemValueChange )
         Spacer(modifier = modifier.padding(16.dp))
-        Button(onClick = onClick, modifier = modifier.fillMaxWidth()) {
+        Button(onClick = onClick, modifier = modifier.fillMaxWidth(),enabled =todoModel.isEntryValid ) {
             Text(text = stringResource(id = R.string.saveTask))
         }
     }
@@ -98,7 +104,7 @@ fun InputTaskTextFiled(
     OutlinedTextField(
         value = todoModel.taskName ,
         onValueChange ={
-            onItemValueChange(TaskDetailse(taskName = it))
+            onItemValueChange(todoModel.copy(taskName = it))
         },
         label = { Text(text = stringResource(id = R.string.taskName))},
         modifier = Modifier.fillMaxWidth(),
@@ -109,7 +115,7 @@ fun InputTaskTextFiled(
     OutlinedTextField(
         value = todoModel.taskDesc ,
         onValueChange ={
-            onItemValueChange(TaskDetailse(taskDesc = it))
+            onItemValueChange(todoModel.copy(taskDesc = it))
         },
         label = { Text(text = stringResource(id = R.string.taskDesc))},
         modifier = Modifier.fillMaxWidth(),

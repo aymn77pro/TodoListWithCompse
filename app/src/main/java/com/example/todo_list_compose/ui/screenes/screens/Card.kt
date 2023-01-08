@@ -21,13 +21,14 @@ import com.example.todo_list_compose.ui.theme.TODO_LIST_COMPOSETheme
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CardTask(todoModel: TodoModel,modifier: Modifier = Modifier,onClick: (TodoModel) -> Unit ) {
-    val expanded by remember { mutableStateOf(false) }
-    //val checkedState = remember { mutableStateOf(true) }
+    var expanded by remember { mutableStateOf(false) }
 
 
     Card(
         elevation = 4.dp,
         modifier = modifier.padding(8.dp),
+        enabled = true,
+        onClick = { onClick(todoModel) }
 
     ) {
         Column(
@@ -45,7 +46,10 @@ fun CardTask(todoModel: TodoModel,modifier: Modifier = Modifier,onClick: (TodoMo
             ) {
                 TaskInformtion(todoModel)
                 Spacer(Modifier.weight(1f))
-                TaskButton(expend = expanded, onClick = { expanded != expanded})
+                TaskButton(
+                    expend = expanded,
+                    onClick = {
+                        expanded = !expanded})
             }
             if (expanded) TaskDescription(todoModel = todoModel, onClick = onClick)
         }
@@ -73,8 +77,7 @@ private fun TaskButton(
     onClick : () -> Unit ,
     modifier: Modifier = Modifier
 ) {
-    IconButton(
-        onClick = onClick) {
+    IconButton(onClick = onClick) {
         Icon(imageVector = Icons.Filled.ExpandMore,
             contentDescription = stringResource(R.string.expand_button_content_description)
         )    }
@@ -106,9 +109,5 @@ private fun TaskDescription(todoModel: TodoModel, modifier: Modifier = Modifier,
             text = todoModel.taskDescription,
             style = MaterialTheme.typography.body1,
         )
-        Button(onClick = { onClick }) {
-            Text(text = stringResource(id = R.string.editTask))
-
-        }
     }
 }

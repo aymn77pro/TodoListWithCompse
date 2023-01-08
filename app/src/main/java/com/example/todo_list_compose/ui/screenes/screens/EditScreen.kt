@@ -1,5 +1,6 @@
 package com.example.todo_list_compose.ui.screenes.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -9,10 +10,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todo_list_compose.R
 import com.example.todo_list_compose.ui.AppViewModelProvider
-import com.example.todo_list_compose.ui.nav.NavigationDestination
+import com.example.todo_list_compose.ui.navigation.NavigationDestination
 import com.example.todo_list_compose.ui.screenes.TodoListTopAppBar
 import com.example.todo_list_compose.ui.screenes.detiles.InputTask
-import com.example.todo_list_compose.ui.screenes.detiles.InputTaskTextFiled
 import com.example.todo_list_compose.ui.screenes.viewModel.EditTaskViewModel
 import kotlinx.coroutines.launch
 
@@ -40,7 +40,7 @@ fun EditScreen(
                navigateUp = onNavigateUp )
         }) {paddingValues ->
             InputTask(
-                todoModel = viewModel.uiEditState.taskDetailse ,
+                todoModel = viewModel.uiEditState ,
                 onClick = {
                           coroutineScope.launch {
                               viewModel.updateTask()
@@ -50,10 +50,6 @@ fun EditScreen(
                 onItemValueChange = viewModel::updateUiState,
                 modifier = modifier.padding(paddingValues)
             )
+        Log.e("TAG Edit", "EditScreen: ${viewModel.uiEditState} ", )
     }
 }
-
-@Composable
-fun EditScreenBody(
-
-){}

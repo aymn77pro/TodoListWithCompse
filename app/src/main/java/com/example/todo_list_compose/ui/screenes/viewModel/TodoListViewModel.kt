@@ -38,14 +38,11 @@ class TodoListViewModel(
 
         // add new task in data base
         suspend fun saveItem() {
-            if (validateInput()) {
+
                 taskDao.insert(taskUiState.taskDetailse.toTodoModel())
 
             }
-        }
 
-        // update task
-        suspend fun update(uiState: TaskDetailse) = taskDao.updateTask(uiState.toTodoModel())
 
 
 
@@ -53,7 +50,6 @@ class TodoListViewModel(
             taskUiState =
                 TaskUiState(taskDetailse = taskDetails, isEntryValid = validateInput(taskDetails))
         }
-       // suspend fun updateTask(task: TodoModel) = taskDao.updateTask(task)
 
 
     private fun validateInput(uiState: TaskDetailse = TaskUiState().taskDetailse): Boolean {

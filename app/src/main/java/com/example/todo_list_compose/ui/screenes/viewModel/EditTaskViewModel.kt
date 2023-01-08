@@ -29,7 +29,7 @@ class EditTaskViewModel(
 
     init {
         viewModelScope.launch {
-            taskDao.getOneTask(taskId)
+           uiEditState = taskDao.getOneTask(taskId)
                 .filterNotNull()
                 .first()
                 .toTaskUiState(isEntryValid = true)

@@ -12,10 +12,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.todo_list_compose.R
+import com.example.todo_list_compose.ui.navigation.TodoNavHost
 
 @Composable
 fun TaskApp(navController: NavHostController = rememberNavController()) {
-    //InventoryNavHost(navController = navController)
+    TodoNavHost(navController = navController)
 }
 
 @Composable

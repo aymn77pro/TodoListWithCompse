@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todo_list_compose.R
 import com.example.todo_list_compose.ui.AppViewModelProvider
-import com.example.todo_list_compose.ui.nav.NavigationDestination
+import com.example.todo_list_compose.ui.navigation.NavigationDestination
 import com.example.todo_list_compose.ui.screenes.TaskDetailse
 import com.example.todo_list_compose.ui.screenes.TodoListTopAppBar
 import com.example.todo_list_compose.ui.screenes.detiles.InputTaskTextFiled

@@ -1,6 +1,6 @@
 package com.example.todo_list_compose.ui.screenes.screens
 
-import android.app.Activity
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,7 +18,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.todo_list_compose.R
 import com.example.todo_list_compose.data.TodoModel
 import com.example.todo_list_compose.ui.AppViewModelProvider
-import com.example.todo_list_compose.ui.nav.NavigationDestination
+import com.example.todo_list_compose.ui.navigation.NavigationDestination
+import com.example.todo_list_compose.ui.screenes.TaskDetailse
 import com.example.todo_list_compose.ui.screenes.TodoListTopAppBar
 import com.example.todo_list_compose.ui.screenes.TodoListViewModel
 
@@ -77,11 +78,14 @@ fun HomeScreen(
     if (tasks.isEmpty()){
         Text(
             text = stringResource(R.string.no_item_description),
-            style = MaterialTheme.typography.subtitle2
+            style = MaterialTheme.typography.h6,
+            modifier = modifier.fillMaxSize()
         )
     } else {
         TaskList(tasks,
-            onClick = { onClick(it.idn) })
+            onClick = {
+                onClick(it.idn)
+                })
     }
 }
 
