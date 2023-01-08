@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">TODO_LIST_COMPOSE</string>
+    <string name="expand_button_content_description">expand</string>
+    <string name="about">"Task Info "</string>
+    <string name="taskName">Task</string>
+    <string name="taskDesc">Informtion</string>
+    <string name="saveTask">save task</string>
+    <string name="addNewTask">new task</string>
+    <string name="no_item_description">no task</string>
+    <string name="task_details">task details</string>
+    <string name="back_button">back</string>
+    <string name="delete_Task">Delete</string>
+    <string name="attention">Attention</string>
+    <string name="delete_question">Are you sure you want to delete?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="editTask">Edit Task</string>
+    <string name="task_entry_title">New Task</string>
+</resources>
