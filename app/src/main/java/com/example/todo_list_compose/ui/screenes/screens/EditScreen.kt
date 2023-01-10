@@ -48,7 +48,8 @@ fun EditScreen(
                           }
                 },
                 onItemValueChange = viewModel::updateUiState,
-                modifier = modifier.padding(paddingValues)
+                modifier = modifier.padding(paddingValues),
+                text = R.string.editTask
             )
         Log.e("TAG Edit", "EditScreen: ${viewModel.uiEditState} ", )
     }

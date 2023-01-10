@@ -21,7 +21,9 @@ class TodoListViewModel(
     private set
 
     val homeUiState : StateFlow<HomeUiState> =
-        taskDao.getAllTask().map { HomeUiState(it) }
+        taskDao.getAllTask().map {
+            HomeUiState(it)
+        }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
@@ -42,7 +44,6 @@ class TodoListViewModel(
                 taskDao.insert(taskUiState.taskDetailse.toTodoModel())
 
             }
-
 
 
 
@@ -79,7 +80,7 @@ data class TaskDetailse(
     val id : Int = 0,
     val taskName:String = "",
     val taskDesc : String = "",
-    val taskDone: Boolean = false
+    var taskDone: Boolean = false
 )
 
 fun TaskDetailse.toTodoModel():TodoModel = TodoModel(

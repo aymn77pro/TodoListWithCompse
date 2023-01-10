@@ -28,7 +28,7 @@ fun TodoNavHost(
                                navController.navigate(NewTaskDestination.route)
             },
             navigateToItemUpdate = {
-                navController.navigate("${DetilesDestination.route}/${it}")
+                navController.navigate("${EditDestination.route}/${it}")
             } )
         }
         composable(route = NewTaskDestination.route ){
@@ -54,7 +54,7 @@ fun TodoNavHost(
             })
         ){
             EditScreen(
-                navigateBack = { navController.popBackStack() },
+                navigateBack = { navController.navigate(HomeTaskDestination.route) },
                 onNavigateUp = { navController.navigateUp() })
         }
     }

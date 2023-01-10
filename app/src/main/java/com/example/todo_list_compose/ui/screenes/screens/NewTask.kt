@@ -3,11 +3,10 @@ package com.example.todo_list_compose.ui.screenes.detiles
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -61,7 +60,8 @@ fun NewTask(
 
                 }
             },
-            modifier = modifier.padding(paddingValues)
+            modifier = modifier.padding(paddingValues),
+            text = R.string.addNewTask
         )
 
     }
@@ -79,7 +79,8 @@ fun InputTask(
     todoModel: TaskUiState,
     modifier: Modifier = Modifier,
     onClick : () -> Unit ,
-    onItemValueChange:(TaskDetailse) -> Unit
+    onItemValueChange:(TaskDetailse) -> Unit,
+    text:Int
 ){
     Column(
         modifier = modifier
@@ -89,7 +90,7 @@ fun InputTask(
         InputTaskTextFiled(todoModel.taskDetailse, onItemValueChange =  onItemValueChange )
         Spacer(modifier = modifier.padding(16.dp))
         Button(onClick = onClick, modifier = modifier.fillMaxWidth(),enabled =todoModel.isEntryValid ) {
-            Text(text = stringResource(id = R.string.saveTask))
+            Text(text = stringResource(id = text))
         }
     }
 }
@@ -121,6 +122,12 @@ fun InputTaskTextFiled(
         modifier = Modifier.fillMaxWidth(),
         enabled = enabled
     )
+    val isChecked = remember { mutableStateOf(todoModel.taskDone) }
+
+    Checkbox(checked = todoModel.taskDone , onCheckedChange = {
+        todoModel.taskDone = it
+        isChecked.value = todoModel.taskDone})
+    Log.e("TAG", "InputTaskTextFiled: is ${todoModel.taskDone}  ", )
 }
 
 @Preview(showSystemUi = true)

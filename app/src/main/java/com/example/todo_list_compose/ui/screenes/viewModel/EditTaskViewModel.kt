@@ -1,5 +1,6 @@
 package com.example.todo_list_compose.ui.screenes.viewModel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -37,7 +38,9 @@ class EditTaskViewModel(
     }
 
     suspend fun updateTask(){
+
         if (validateInput(uiEditState.taskDetailse)){
+
             taskDao.updateTask(uiEditState.taskDetailse.toTodoModel())
         }
     }
@@ -46,6 +49,8 @@ class EditTaskViewModel(
         uiEditState = TaskUiState(
             taskDetailse = taskDetailse,
             isEntryValid = validateInput(taskDetailse) )
+        Log.d("TAG is true or false", "updateTask: ${uiEditState.taskDetailse.taskDone} ", )
+
     }
 
 

@@ -59,11 +59,11 @@ fun CardTask(todoModel: TodoModel,modifier: Modifier = Modifier,onClick: (TodoMo
 
 @Composable
 fun TaskInformtion(todoModel: TodoModel, modifier:Modifier = Modifier) {
-    Checkbox(
-        checked = todoModel.taskDone,
-        onCheckedChange = { todoModel.taskDone = it },
-        modifier = modifier.padding(16.dp, vertical = 8.dp)
-    )
+
+        val isChecked = remember { mutableStateOf(todoModel.taskDone) }
+
+        Checkbox(checked = isChecked.value, onCheckedChange = { isChecked.value = it })
+
     Text(
         text = todoModel.taskName,
         modifier = modifier.padding(16.dp),
@@ -103,11 +103,11 @@ private fun TaskDescription(todoModel: TodoModel, modifier: Modifier = Modifier,
     ) {
         Text(
             text = stringResource(R.string.about),
-            style = MaterialTheme.typography.h3,
+            style = MaterialTheme.typography.body2,
         )
         Text(
             text = todoModel.taskDescription,
-            style = MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.body2,
         )
     }
 }

@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">TODO_LIST_COMPOSE</string>
     <string name="expand_button_content_description">expand</string>
-    <string name="about">"Task Info "</string>
+    <string name="about">"Task Information: "</string>
     <string name="taskName">Task</string>
-    <string name="taskDesc">Informtion</string>
+    <string name="taskDesc">Information</string>
     <string name="saveTask">save task</string>
     <string name="addNewTask">new task</string>
     <string name="no_item_description">no task</string>
