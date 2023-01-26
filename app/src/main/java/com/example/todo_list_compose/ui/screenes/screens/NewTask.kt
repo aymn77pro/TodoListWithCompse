@@ -4,10 +4,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,7 +42,8 @@ fun NewTask(
             TodoListTopAppBar(
                 title = stringResource(id = NewTaskDestination.titleRes) ,
                 canNavigateBack = canNavigateBack,
-                navigateUp = onNavigateUp)
+                navigateUp = onNavigateUp
+            )
         }
     ) { paddingValues ->
         InputTask(
@@ -122,12 +120,12 @@ fun InputTaskTextFiled(
         modifier = Modifier.fillMaxWidth(),
         enabled = enabled
     )
-    val isChecked = remember { mutableStateOf(todoModel.taskDone) }
+    var isChecked by remember { mutableStateOf(todoModel.taskDone) }
 
-    Checkbox(checked = todoModel.taskDone , onCheckedChange = {
-        todoModel.taskDone = it
-        isChecked.value = todoModel.taskDone})
-    Log.e("TAG", "InputTaskTextFiled: is ${todoModel.taskDone}  ", )
+    Checkbox(checked = isChecked , onCheckedChange = {
+        isChecked = it
+        todoModel.taskDone = isChecked})
+    Log.e("TAG", "InputTaskTextFiled:todoModel is ${todoModel.taskDone} and isChecked is $isChecked   ", )
 }
 
 @Preview(showSystemUi = true)

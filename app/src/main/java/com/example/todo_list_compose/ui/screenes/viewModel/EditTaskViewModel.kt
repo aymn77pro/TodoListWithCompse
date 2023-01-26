@@ -45,6 +45,9 @@ class EditTaskViewModel(
         }
     }
 
+    suspend fun deleteTask() = taskDao.deleteTask(uiEditState.taskDetailse.toTodoModel())
+
+
     fun updateUiState(taskDetailse: TaskDetailse){
         uiEditState = TaskUiState(
             taskDetailse = taskDetailse,

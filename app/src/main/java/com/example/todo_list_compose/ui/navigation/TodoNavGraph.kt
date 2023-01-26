@@ -54,7 +54,7 @@ fun TodoNavHost(
             })
         ){
             EditScreen(
-                navigateBack = { navController.navigate(HomeTaskDestination.route) },
+                navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() })
         }
     }

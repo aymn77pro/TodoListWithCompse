@@ -62,7 +62,10 @@ fun TaskInformtion(todoModel: TodoModel, modifier:Modifier = Modifier) {
 
         val isChecked = remember { mutableStateOf(todoModel.taskDone) }
 
-        Checkbox(checked = isChecked.value, onCheckedChange = { isChecked.value = it })
+        Checkbox(checked = isChecked.value,
+            onCheckedChange = {
+                isChecked.value = it
+                todoModel.taskDone = isChecked.value})
 
     Text(
         text = todoModel.taskName,
